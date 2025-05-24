@@ -16,7 +16,8 @@ module RubyLLM
             model: model,
             prompt: prompt,
             n: 1,
-            size: size
+            size: size,
+            quality: 'medium'
           }
         end
 
