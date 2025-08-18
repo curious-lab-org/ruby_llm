@@ -9,7 +9,7 @@ http_interactions:
         best friend","dimensions":768}'
     headers:
       User-Agent:
-      - Faraday v2.13.1
+      - Faraday v2.13.4
       Authorization:
       - Bearer <OPENAI_API_KEY>
       Content-Type:
@@ -24,7 +24,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 12 May 2025 13:46:17 GMT
+      - Tue, 12 Aug 2025 14:47:22 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -40,15 +40,17 @@ http_interactions:
       Openai-Organization:
       - "<OPENAI_ORGANIZATION>"
       Openai-Processing-Ms:
-      - '96'
+      - '55'
+      Openai-Project:
+      - proj_KyS64Yhsc9qhhwjNcgkOa88E
       Openai-Version:
       - '2020-10-01'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Via:
-      - envoy-router-84b456966f-wcnnl
+      - envoy-router-8966996bc-lzw45
       X-Envoy-Upstream-Service-Time:
-      - '384'
+      - '209'
       X-Ratelimit-Limit-Requests:
       - '3000'
       X-Ratelimit-Limit-Tokens:
@@ -863,5 +865,5 @@ http_interactions:
             "total_tokens": 7
           }
         }
-  recorded_at: Mon, 12 May 2025 13:46:17 GMT
+  recorded_at: Tue, 12 Aug 2025 14:47:22 GMT
 recorded_with: VCR 6.3.1

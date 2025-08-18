@@ -18,10 +18,10 @@ module RubyLLM
           has_many :messages,
                    -> { order(created_at: :asc) },
                    class_name: @message_class,
+                   inverse_of: :chat,
                    dependent: :destroy
 
-          delegate :add_message,
-                   to: :to_llm
+          delegate :add_message, to: :to_llm
         end
 
         def acts_as_message(chat_class: 'Chat',
@@ -84,30 +84,25 @@ module RubyLLM
         attr_reader :tool_call_class
       end
 
-      def to_llm
-        @chat ||= RubyLLM.chat(model: model_id)
+      def to_llm(context: nil)
+        @chat ||= if context
+                    context.chat(model: model_id)
+                  else
+                    RubyLLM.chat(model: model_id)
+                  end
         @chat.reset_messages!
 
-        # Load existing messages into chat
         messages.each do |msg|
           @chat.add_message(msg.to_llm)
         end
 
-        # Set up message persistence
-        @chat.on_new_message { persist_new_message }
-             .on_end_message { |msg| persist_message_completion(msg) }
+        setup_persistence_callbacks
       end
 
       def with_instructions(instructions, replace: false)
         transaction do
-          # If replace is true, remove existing system messages
           messages.where(role: :system).destroy_all if replace
-
-          # Create the new system message
-          messages.create!(
-            role: :system,
-            content: instructions
-          )
+          messages.create!(role: :system, content: instructions)
         end
         to_llm.with_instructions(instructions)
         self
@@ -133,18 +128,57 @@ module RubyLLM
         self
       end
 
-      def with_context(...)
-        to_llm.with_context(...)
+      def with_context(context)
+        to_llm(context: context)
         self
       end
 
-      def on_new_message(...)
-        to_llm.on_new_message(...)
+      def with_params(...)
+        to_llm.with_params(...)
         self
       end
 
-      def on_end_message(...)
-        to_llm.on_end_message(...)
+      def with_headers(...)
+        to_llm.with_headers(...)
+        self
+      end
+
+      def with_schema(...)
+        to_llm.with_schema(...)
+        self
+      end
+
+      def on_new_message(&block)
+        to_llm
+
+        existing_callback = @chat.instance_variable_get(:@on)[:new_message]
+
+        @chat.on_new_message do
+          existing_callback&.call
+          block&.call
+        end
+        self
+      end
+
+      def on_end_message(&block)
+        to_llm
+
+        existing_callback = @chat.instance_variable_get(:@on)[:end_message]
+
+        @chat.on_end_message do |msg|
+          existing_callback&.call(msg)
+          block&.call(msg)
+        end
+        self
+      end
+
+      def on_tool_call(...)
+        to_llm.on_tool_call(...)
+        self
+      end
+
+      def on_tool_result(...)
+        to_llm.on_tool_result(...)
         self
       end
 
@@ -164,33 +198,58 @@ module RubyLLM
       def complete(...)
         to_llm.complete(...)
       rescue RubyLLM::Error => e
-        if @message&.persisted? && @message.content.blank?
-          RubyLLM.logger.debug "RubyLLM: API call failed, destroying message: #{@message.id}"
-          @message.destroy
-        end
+        cleanup_failed_messages if @message&.persisted? && @message.content.blank?
+        cleanup_orphaned_tool_results
         raise e
       end
 
       private
 
+      def cleanup_failed_messages
+        RubyLLM.logger.debug "RubyLLM: API call failed, destroying message: #{@message.id}"
+        @message.destroy
+      end
+
+      def cleanup_orphaned_tool_results
+        loop do
+          messages.reload
+          last = messages.order(:id).last
+
+          break unless last&.tool_call? || last&.tool_result?
+
+          last.destroy
+        end
+      end
+
+      def setup_persistence_callbacks
+        # Only set up once per chat instance
+        return @chat if @chat.instance_variable_get(:@_persistence_callbacks_setup)
+
+        # Set up persistence callbacks (user callbacks will be chained via on_new_message/on_end_message methods)
+        @chat.on_new_message { persist_new_message }
+        @chat.on_end_message { |msg| persist_message_completion(msg) }
+
+        @chat.instance_variable_set(:@_persistence_callbacks_setup, true)
+        @chat
+      end
+
       def persist_new_message
-        @message = messages.create!(
-          role: :assistant,
-          content: String.new
-        )
+        @message = messages.create!(role: :assistant, content: '')
       end
 
       def persist_message_completion(message)
         return unless message
 
-        if message.tool_call_id
-          tool_call_id = self.class.tool_call_class.constantize.find_by(tool_call_id: message.tool_call_id)&.id
-        end
+        tool_call_id = find_tool_call_id(message.tool_call_id) if message.tool_call_id
 
         transaction do
-          @message.update(
+          # Convert parsed JSON back to JSON string for storage
+          content = message.content
+          content = content.to_json if content.is_a?(Hash) || content.is_a?(Array)
+
+          @message.update!(
             role: message.role,
-            content: message.content,
+            content: content,
             model_id: message.model_id,
             input_tokens: message.input_tokens,
             output_tokens: message.output_tokens
@@ -209,17 +268,46 @@ module RubyLLM
         end
       end
 
+      def find_tool_call_id(tool_call_id)
+        self.class.tool_call_class.constantize.find_by(tool_call_id: tool_call_id)&.id
+      end
+
       def persist_content(message_record, attachments)
         return unless message_record.respond_to?(:attachments)
 
-        attachments = Utils.to_safe_array(attachments).reject(&:blank?)
-        return if attachments.empty?
-
-        message_record.attachments.attach(attachments)
+        attachables = prepare_for_active_storage(attachments)
+        message_record.attachments.attach(attachables) if attachables.any?
       end
 
-      def extract_filename(file)
-        file.respond_to?(:original_filename) ? file.original_filename : 'attachment'
+      def prepare_for_active_storage(attachments)
+        Utils.to_safe_array(attachments).filter_map do |attachment|
+          case attachment
+          when ActionDispatch::Http::UploadedFile, ActiveStorage::Blob
+            attachment
+          when ActiveStorage::Attached::One, ActiveStorage::Attached::Many
+            attachment.blobs
+          when Hash
+            attachment.values.map { |v| prepare_for_active_storage(v) }
+          else
+            convert_to_active_storage_format(attachment)
+          end
+        end.flatten.compact
+      end
+
+      def convert_to_active_storage_format(source)
+        return if source.blank?
+
+        # Let RubyLLM::Attachment handle the heavy lifting
+        attachment = RubyLLM::Attachment.new(source)
+
+        {
+          io: StringIO.new(attachment.content),
+          filename: attachment.filename,
+          content_type: attachment.mime_type
+        }
+      rescue StandardError => e
+        RubyLLM.logger.warn "Failed to process attachment #{source}: #{e.message}"
+        nil
       end
     end
 
@@ -244,6 +332,8 @@ module RubyLLM
         )
       end
 
+      private
+
       def extract_tool_calls
         tool_calls.to_h do |tool_call|
           [
@@ -265,18 +355,14 @@ module RubyLLM
         return content unless respond_to?(:attachments) && attachments.attached?
 
         RubyLLM::Content.new(content).tap do |content_obj|
-          # Prevent tempfiles from being garbage-collected during API calls
           @_tempfiles = []
 
           attachments.each do |attachment|
-            # Always download the file to ensure it works across all storage backends
             tempfile = download_attachment(attachment)
-            content_obj.add_attachment(tempfile)
+            content_obj.add_attachment(tempfile, filename: attachment.filename.to_s)
           end
         end
       end
-
-      private
 
       def download_attachment(attachment)
         ext = File.extname(attachment.filename.to_s)
@@ -284,16 +370,11 @@ module RubyLLM
         tempfile = Tempfile.new([basename, ext])
         tempfile.binmode
 
-        attachment.download do |chunk|
-          tempfile.write(chunk)
-        end
+        attachment.download { |chunk| tempfile.write(chunk) }
 
         tempfile.flush
         tempfile.rewind
-
-        # Keep reference to prevent GC
         @_tempfiles << tempfile
-
         tempfile
       end
     end

@@ -6,14 +6,14 @@ require 'fileutils'
 namespace :models do
   desc 'Generate available models documentation'
   task :docs do
-    FileUtils.mkdir_p('docs/guides') # ensure output directory exists
+    FileUtils.mkdir_p('docs') # ensure output directory exists
 
     # Generate markdown content
     output = generate_models_markdown
 
     # Write the output
-    File.write('docs/guides/available-models.md', output)
-    puts 'Generated docs/guides/available-models.md'
+    File.write('docs/_reference/available-models.md', output)
+    puts 'Generated docs/_reference/available-models.md'
   end
 end
 
@@ -22,15 +22,16 @@ def generate_models_markdown
     ---
     layout: default
     title: Available Models
-    parent: Guides
-    nav_order: 10
-    permalink: /guides/available-models
+    nav_order: 1
+    description: Browse hundreds of AI models from every major provider. Always up-to-date, automatically generated.
+    redirect_from:
+      - /guides/available-models
     ---
 
-    # Available Models
+    # {{ page.title }}
     {: .no_toc }
 
-    This guide lists all models available in RubyLLM, automatically generated from the current model registry.
+    {{ page.description }}
     {: .fs-6 .fw-300 }
 
     ## Table of contents
@@ -41,15 +42,28 @@ def generate_models_markdown
 
     ---
 
-    ## Contributing
+    After reading this guide, you will know:
 
-    The model list is automatically generated from the model registry. To add or update models:
+    * How RubyLLM's model registry works and where data comes from
+    * How to find models by provider, capability, or purpose
+    * What information is available for each model
+    * How to use model aliases for simpler configuration
 
-    1. Edit the appropriate `capabilities.rb` file in `lib/ruby_llm/providers/<provider>/`
-    2. Run `rake models:update` to refresh the model registry
-    3. Submit a pull request with the updated `models.json`
+    ## How Model Data Works
 
-    See [Contributing Guide](/CONTRIBUTING.md) for more details.
+    RubyLLM's model registry combines data from multiple sources:
+
+    - **OpenAI, Anthropic, DeepSeek, Gemini**: Data from [Parsera](https://api.parsera.org/v1/llm-specs)
+    - **OpenRouter**: Direct from OpenRouter's API
+    - **Other providers**: Defined in `capabilities.rb` files
+
+    ## Contributing Model Updates
+
+    **For major providers** (OpenAI, Anthropic, DeepSeek, Gemini): File issues with [Parsera](https://github.com/parsera-labs/api-llm-specs/issues) for public model data corrections.
+
+    **For other providers**: Edit `lib/ruby_llm/providers/<provider>/capabilities.rb` then run `rake models:update`.
+
+    See the [Contributing Guide](https://github.com/crmne/ruby_llm/blob/main/CONTRIBUTING.md) for details.
 
     ## Last Updated
     {: .d-inline-block }
@@ -72,16 +86,16 @@ def generate_models_markdown
 end
 
 def generate_provider_sections
-  RubyLLM::Provider.providers.keys.map do |provider|
+  RubyLLM::Provider.providers.filter_map do |provider, provider_class|
     models = RubyLLM.models.by_provider(provider)
     next if models.none?
 
     <<~PROVIDER
-      ### #{provider.to_s.capitalize} (#{models.count})
+      ### #{provider_class.name} (#{models.count})
 
       #{models_table(models)}
     PROVIDER
-  end.compact.join("\n\n")
+  end.join("\n\n")
 end
 
 def generate_capability_sections
@@ -93,7 +107,7 @@ def generate_capability_sections
     'Batch Processing' => RubyLLM.models.select { |m| m.capabilities.include?('batch') }
   }
 
-  capabilities.map do |capability, models|
+  capabilities.filter_map do |capability, models|
     next if models.none?
 
     <<~CAPABILITY
@@ -101,7 +115,7 @@ def generate_capability_sections
 
       #{models_table(models)}
     CAPABILITY
-  end.compact.join("\n\n")
+  end.join("\n\n")
 end
 
 def generate_modality_sections # rubocop:disable Metrics/PerceivedComplexity
@@ -161,15 +175,14 @@ end
 def models_table(models)
   return '*No models found*' if models.none?
 
-  headers = ['Model', 'ID', 'Provider', 'Context', 'Max Output', 'Standard Pricing (per 1M tokens)']
-  alignment = [':--', ':--', ':--', '--:', '--:', ':--']
+  headers = ['Model', 'Provider', 'Context', 'Max Output', 'Standard Pricing (per 1M tokens)']
+  alignment = [':--', ':--', '--:', '--:', ':--']
 
   rows = models.sort_by { |m| [m.provider, m.name] }.map do |model|
     # Format pricing information
     pricing = standard_pricing_display(model)
 
     [
-      model.name,
       model.id,
       model.provider,
       model.context_window || '-',

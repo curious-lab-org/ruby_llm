@@ -1,0 +1,169 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.mistral.ai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"mistral-small-latest","messages":[{"role":"user","content":"Who
+        was Ruby''s creator?"}],"stream":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.13.4
+      Authorization:
+      - Bearer <MISTRAL_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 17 Aug 2025 19:41:52 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Mistral-Correlation-Id:
+      - '0198b98d-7420-77f9-8ce6-a5b0c1ec9954'
+      X-Kong-Request-Id:
+      - '0198b98d-7420-77f9-8ce6-a5b0c1ec9954'
+      X-Envoy-Upstream-Service-Time:
+      - '869'
+      X-Ratelimit-Limit-Tokens-Minute:
+      - '500000'
+      X-Ratelimit-Remaining-Tokens-Minute:
+      - '499742'
+      X-Ratelimit-Limit-Tokens-Month:
+      - '1000000000'
+      X-Ratelimit-Remaining-Tokens-Month:
+      - '999557628'
+      X-Ratelimit-Tokens-Query-Cost:
+      - '139'
+      X-Ratelimit-Limit-Req-Minute:
+      - '60'
+      X-Ratelimit-Remaining-Req-Minute:
+      - '57'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Upstream-Latency:
+      - '869'
+      X-Kong-Proxy-Latency:
+      - '7'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - "<COOKIE>"
+      - "<COOKIE>"
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - "<CF_RAY>"
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"4de2e063f81642c58f0a210e8a0ea19c","created":1755459712,"model":"mistral-small-latest","usage":{"prompt_tokens":9,"total_tokens":139,"completion_tokens":130},"object":"chat.completion","choices":[{"index":0,"finish_reason":"stop","message":{"role":"assistant","tool_calls":null,"content":"Ruby
+        was created by **Yukihiro \"Matz\" Matsumoto**, a Japanese programmer. He
+        began developing Ruby in the 1990s and released the first public version in
+        1995. Matsumoto designed Ruby to be a simple, elegant, and productive programming
+        language, emphasizing developer happiness and readability.\n\nRuby gained
+        widespread popularity with the rise of the **Ruby on Rails** web framework,
+        created by David Heinemeier Hansson in 2004. Today, Ruby remains a popular
+        language for web development, scripting, and automation.\n\nWould you like
+        more details about Ruby''s history or features?"}}]}'
+  recorded_at: Sun, 17 Aug 2025 19:41:52 GMT
+- request:
+    method: post
+    uri: https://api.mistral.ai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"mistral-small-latest","messages":[{"role":"user","content":"Who
+        was Ruby''s creator?"},{"role":"assistant","content":"Ruby was created by
+        **Yukihiro \"Matz\" Matsumoto**, a Japanese programmer. He began developing
+        Ruby in the 1990s and released the first public version in 1995. Matsumoto
+        designed Ruby to be a simple, elegant, and productive programming language,
+        emphasizing developer happiness and readability.\n\nRuby gained widespread
+        popularity with the rise of the **Ruby on Rails** web framework, created by
+        David Heinemeier Hansson in 2004. Today, Ruby remains a popular language for
+        web development, scripting, and automation.\n\nWould you like more details
+        about Ruby''s history or features?"},{"role":"user","content":"What year did
+        he create Ruby?"}],"stream":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.13.4
+      Authorization:
+      - Bearer <MISTRAL_API_KEY>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 17 Aug 2025 19:41:53 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Mistral-Correlation-Id:
+      - '0198b98d-7822-7b91-9193-93a0552b728f'
+      X-Kong-Request-Id:
+      - '0198b98d-7822-7b91-9193-93a0552b728f'
+      X-Envoy-Upstream-Service-Time:
+      - '729'
+      X-Ratelimit-Limit-Tokens-Minute:
+      - '500000'
+      X-Ratelimit-Remaining-Tokens-Minute:
+      - '499487'
+      X-Ratelimit-Limit-Tokens-Month:
+      - '1000000000'
+      X-Ratelimit-Remaining-Tokens-Month:
+      - '999557373'
+      X-Ratelimit-Tokens-Query-Cost:
+      - '255'
+      X-Ratelimit-Limit-Req-Minute:
+      - '60'
+      X-Ratelimit-Remaining-Req-Minute:
+      - '56'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Kong-Upstream-Latency:
+      - '730'
+      X-Kong-Proxy-Latency:
+      - '8'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - "<COOKIE>"
+      - "<COOKIE>"
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - "<CF_RAY>"
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6IjQxOWRmZjM3ZmFhMDRmMWVhYmQzNmFhNGQ1MTYzODg0IiwiY3JlYXRlZCI6MTc1NTQ1OTcxMywibW9kZWwiOiJtaXN0cmFsLXNtYWxsLWxhdGVzdCIsInVzYWdlIjp7InByb21wdF90b2tlbnMiOjE0OCwidG90YWxfdG9rZW5zIjoyNTUsImNvbXBsZXRpb25fdG9rZW5zIjoxMDd9LCJvYmplY3QiOiJjaGF0LmNvbXBsZXRpb24iLCJjaG9pY2VzIjpbeyJpbmRleCI6MCwiZmluaXNoX3JlYXNvbiI6InN0b3AiLCJtZXNzYWdlIjp7InJvbGUiOiJhc3Npc3RhbnQiLCJ0b29sX2NhbGxzIjpudWxsLCJjb250ZW50IjoiWXVraWhpcm8gXCJNYXR6XCIgTWF0c3Vtb3RvIGJlZ2FuIGRldmVsb3BpbmcgKipSdWJ5KiogaW4gKioxOTkzKiosIGFuZCB0aGUgZmlyc3QgcHVibGljIHJlbGVhc2Ugd2FzIGluICoqRmVicnVhcnkgMTk5NSoqLlxuXG5NYXR6IGFubm91bmNlZCBSdWJ5J3MgaW5pdGlhbCB2ZXJzaW9uICgwLjk1KSBpbiBhIEphcGFuZXNlIG5ld3Nncm91cCwgYW5kIGl0IHF1aWNrbHkgZ2FpbmVkIGF0dGVudGlvbiBmb3IgaXRzIHNpbXBsaWNpdHkgYW5kIGV4cHJlc3NpdmUgc3ludGF4LiBUaGUgbGFuZ3VhZ2UncyBkZXNpZ24gcGhpbG9zb3BoeeKAlHByaW9yaXRpemluZyBwcm9ncmFtbWVyIGhhcHBpbmVzc+KAlGhlbHBlZCBpdCBncm93IGluIHBvcHVsYXJpdHkgb3ZlciB0aGUgeWVhcnMuXG5cbldvdWxkIHlvdSBsaWtlIGRldGFpbHMgb24gUnVieSdzIGV2b2x1dGlvbiBvciBrZXkgbWlsZXN0b25lcz8ifX1dfQ==
+  recorded_at: Sun, 17 Aug 2025 19:41:53 GMT
+recorded_with: VCR 6.3.1

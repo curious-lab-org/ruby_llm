@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"role":"user","parts":[{"text":"Generate a response with
+        2 users and metadata with version 1"}]}],"generationConfig":{"responseMimeType":"application/json","responseSchema":{"type":"OBJECT","properties":{"users":{"type":"ARRAY","items":{"type":"OBJECT","properties":{"name":{"type":"STRING"},"role":{"type":"STRING","enum":["admin","user","guest"]}},"required":["name","role"]}},"metadata":{"type":"OBJECT","properties":{"created_at":{"type":"STRING"},"version":{"type":"NUMBER"}},"required":["created_at","version"]}},"required":["users","metadata"]}}}'
+    headers:
+      User-Agent:
+      - Faraday v2.13.4
+      X-Goog-Api-Key:
+      - "<GEMINI_API_KEY>"
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      - Referer
+      - X-Origin
+      Date:
+      - Sun, 17 Aug 2025 19:38:29 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Server-Timing:
+      - gfet4t7; dur=752
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "candidates": [
+            {
+              "content": {
+                "parts": [
+                  {
+                    "text": "{\n  \"metadata\": {\n    \"created_at\": \"2024-01-01\",\n    \"version\": 1\n  },\n  \"users\": [\n    {\n      \"name\": \"Alice\",\n      \"role\": \"admin\"\n    },\n    {\n      \"name\": \"Bob\",\n      \"role\": \"user\"\n    }\n  ]\n}"
+                  }
+                ],
+                "role": "model"
+              },
+              "finishReason": "STOP",
+              "avgLogprobs": -0.028380616680606381
+            }
+          ],
+          "usageMetadata": {
+            "promptTokenCount": 40,
+            "candidatesTokenCount": 91,
+            "totalTokenCount": 131,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 40
+              }
+            ],
+            "candidatesTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 91
+              }
+            ]
+          },
+          "modelVersion": "gemini-2.0-flash",
+          "responseId": "tS-iaMK4CNz01PIP79y16Qs"
+        }
+  recorded_at: Sun, 17 Aug 2025 19:38:29 GMT
+recorded_with: VCR 6.3.1

@@ -2,12 +2,14 @@
 
 module RubyLLM
   module Providers
-    module Anthropic
+    class Anthropic
       # Handles formatting of media content (images, PDFs, audio) for Anthropic
       module Media
         module_function
 
         def format_content(content)
+          # Convert Hash/Array back to JSON string for API
+          return [format_text(content.to_json)] if content.is_a?(Hash) || content.is_a?(Array)
           return [format_text(content)] unless content.is_a?(Content)
 
           parts = []

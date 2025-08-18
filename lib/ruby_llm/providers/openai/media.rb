@@ -2,12 +2,14 @@
 
 module RubyLLM
   module Providers
-    module OpenAI
+    class OpenAI
       # Handles formatting of media content (images, audio) for OpenAI APIs
       module Media
         module_function
 
         def format_content(content)
+          # Convert Hash/Array back to JSON string for API
+          return content.to_json if content.is_a?(Hash) || content.is_a?(Array)
           return content unless content.is_a?(Content)
 
           parts = []
@@ -35,8 +37,7 @@ module RubyLLM
           {
             type: 'image_url',
             image_url: {
-              url: image.url? ? image.source : "data:#{image.mime_type};base64,#{image.encoded}",
-              detail: 'auto'
+              url: image.url? ? image.source : "data:#{image.mime_type};base64,#{image.encoded}"
             }
           }
         end

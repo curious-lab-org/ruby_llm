@@ -15,15 +15,20 @@ module RubyLLM
                   :openai_api_base,
                   :openai_organization_id,
                   :openai_project_id,
+                  :openai_use_system_role,
                   :anthropic_api_key,
                   :gemini_api_key,
                   :deepseek_api_key,
+                  :perplexity_api_key,
                   :bedrock_api_key,
                   :bedrock_secret_key,
                   :bedrock_region,
                   :bedrock_session_token,
                   :openrouter_api_key,
                   :ollama_api_base,
+                  :gpustack_api_base,
+                  :gpustack_api_key,
+                  :mistral_api_key,
                   # Default models
                   :default_model,
                   :default_embedding_model,
@@ -36,9 +41,10 @@ module RubyLLM
                   :retry_interval_randomness,
                   :http_proxy,
                   # Logging configuration
+                  :logger,
                   :log_file,
                   :log_level,
-                  :log_assume_model_exists
+                  :log_stream_debug
 
     def initialize
       # Connection configuration
@@ -52,30 +58,16 @@ module RubyLLM
       # Default models
       @default_model = 'gpt-4.1-nano'
       @default_embedding_model = 'text-embedding-3-small'
-      @default_image_model = 'dall-e-3'
+      @default_image_model = 'gpt-image-1'
 
       # Logging configuration
       @log_file = $stdout
       @log_level = ENV['RUBYLLM_DEBUG'] ? Logger::DEBUG : Logger::INFO
-      @log_assume_model_exists = true
+      @log_stream_debug = ENV['RUBYLLM_STREAM_DEBUG'] == 'true'
     end
 
-    def inspect
-      redacted = lambda do |name, value|
-        if name.match?(/_id|_key|_secret|_token$/)
-          value.nil? ? 'nil' : '[FILTERED]'
-        else
-          value
-        end
-      end
-
-      inspection = instance_variables.map do |ivar|
-        name = ivar.to_s.delete_prefix('@')
-        value = redacted[name, instance_variable_get(ivar)]
-        "#{name}: #{value}"
-      end.join(', ')
-
-      "#<#{self.class}:0x#{object_id.to_s(16)} #{inspection}>"
+    def instance_variables
+      super.reject { |ivar| ivar.to_s.match?(/_id|_key|_secret|_token$/) }
     end
   end
 end

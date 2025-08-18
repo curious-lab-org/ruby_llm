@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.13.1
+      - Faraday v2.13.4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -26,42 +26,40 @@ http_interactions:
       - GitHub.com
       Content-Type:
       - text/plain; charset=utf-8
-      X-Origin-Cache:
-      - HIT
       Last-Modified:
-      - Wed, 14 May 2025 18:45:16 GMT
+      - Fri, 01 Aug 2025 01:17:08 GMT
       Access-Control-Allow-Origin:
       - "*"
       Etag:
-      - W/"6824e4bc-9c6"
+      - W/"688c1594-9c6"
       Expires:
-      - Thu, 15 May 2025 06:18:40 GMT
+      - Sun, 17 Aug 2025 19:42:14 GMT
       Cache-Control:
       - max-age=600
       X-Proxy-Cache:
       - MISS
       X-Github-Request-Id:
-      - 837C:2EE16:10587B4:107C83D:682584E8
+      - 8CA4:EE4D3:5926144:59ABDFB:68A22E3E
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 May 2025 09:36:39 GMT
+      - Sun, 17 Aug 2025 19:33:22 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '67'
+      - '0'
       X-Served-By:
-      - cache-fra-etou8220093-FRA
+      - cache-fra-etou8220141-FRA
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1747301799.258305,VS0,VE2
+      - S1755459203.760655,VS0,VE98
       Vary:
       - Accept-Encoding
       X-Fastly-Request-Id:
-      - 02e9f10f65f179c2e0ecb50ae627e3bdb2179b39
+      - 1dc64034ca2e0524d1c4e870f9dc6e7888c7a9d6
     body:
       encoding: ASCII-8BIT
       string: "Ruby is copyrighted free software by Yukihiro Matsumoto <matz@netlab.jp>.\nYou
@@ -97,24 +95,24 @@ http_interactions:
         \"AS IS\" AND WITHOUT ANY EXPRESS OR\n     IMPLIED WARRANTIES, INCLUDING,
         WITHOUT LIMITATION, THE IMPLIED\n     WARRANTIES OF MERCHANTABILITY AND FITNESS
         FOR A PARTICULAR\n     PURPOSE.\n"
-  recorded_at: Thu, 15 May 2025 09:36:39 GMT
+  recorded_at: Sun, 17 Aug 2025 19:33:22 GMT
 - request:
     method: post
     uri: https://api.openai.com/v1/chat/completions
     body:
       encoding: UTF-8
-      string: '{"model":"gpt-4.1-nano","messages":[{"role":"user","content":[{"type":"text","text":"What
-        is Ruby?"},{"type":"text","text":"<file name=''license.txt''>Ruby is copyrighted
-        free software by Yukihiro Matsumoto <matz@netlab.jp>.\nYou can redistribute
-        it and/or modify it under either the terms of the\n2-clause BSDL (see the
-        file BSDL), or the conditions below:\n\n  1. You may make and give away verbatim
-        copies of the source form of the\n     software without restriction, provided
-        that you duplicate all of the\n     original copyright notices and associated
-        disclaimers.\n\n  2. You may modify your copy of the software in any way,
-        provided that\n     you do at least ONE of the following:\n\n       a) place
-        your modifications in the Public Domain or otherwise\n          make them
-        Freely Available, such as by posting said\n\t  modifications to Usenet or
-        an equivalent medium, or by allowing\n\t  the author to include your modifications
+      string: '{"model":"gpt-4.1-nano","messages":[{"role":"user","content":[{"type":"text","text":"What''s
+        in this file?"},{"type":"text","text":"<file name=''license.txt'' mime_type=''text/plain''>Ruby
+        is copyrighted free software by Yukihiro Matsumoto <matz@netlab.jp>.\nYou
+        can redistribute it and/or modify it under either the terms of the\n2-clause
+        BSDL (see the file BSDL), or the conditions below:\n\n  1. You may make and
+        give away verbatim copies of the source form of the\n     software without
+        restriction, provided that you duplicate all of the\n     original copyright
+        notices and associated disclaimers.\n\n  2. You may modify your copy of the
+        software in any way, provided that\n     you do at least ONE of the following:\n\n       a)
+        place your modifications in the Public Domain or otherwise\n          make
+        them Freely Available, such as by posting said\n\t  modifications to Usenet
+        or an equivalent medium, or by allowing\n\t  the author to include your modifications
         in the software.\n\n       b) use the modified software only within your corporation
         or\n          organization.\n\n       c) give non-standard binaries non-standard
         names, with\n          instructions on where to get the original software
@@ -137,10 +135,10 @@ http_interactions:
         aggregated with this\n     software.\n\n  6. THIS SOFTWARE IS PROVIDED \"AS
         IS\" AND WITHOUT ANY EXPRESS OR\n     IMPLIED WARRANTIES, INCLUDING, WITHOUT
         LIMITATION, THE IMPLIED\n     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-        A PARTICULAR\n     PURPOSE.\n</file>"}]}],"temperature":0.7,"stream":false}'
+        A PARTICULAR\n     PURPOSE.\n</file>"}]}],"stream":false}'
     headers:
       User-Agent:
-      - Faraday v2.13.1
+      - Faraday v2.13.4
       Authorization:
       - Bearer <OPENAI_API_KEY>
       Content-Type:
@@ -155,7 +153,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 15 May 2025 09:36:40 GMT
+      - Sun, 17 Aug 2025 19:33:24 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -167,11 +165,13 @@ http_interactions:
       Openai-Organization:
       - "<OPENAI_ORGANIZATION>"
       Openai-Processing-Ms:
-      - '1094'
+      - '1060'
+      Openai-Project:
+      - proj_KyS64Yhsc9qhhwjNcgkOa88E
       Openai-Version:
       - '2020-10-01'
       X-Envoy-Upstream-Service-Time:
-      - '1098'
+      - '1313'
       X-Ratelimit-Limit-Requests:
       - '500'
       X-Ratelimit-Limit-Tokens:
@@ -179,20 +179,20 @@ http_interactions:
       X-Ratelimit-Remaining-Requests:
       - '499'
       X-Ratelimit-Remaining-Tokens:
-      - '199361'
+      - '199353'
       X-Ratelimit-Reset-Requests:
       - 120ms
       X-Ratelimit-Reset-Tokens:
-      - 191ms
+      - 194ms
       X-Request-Id:
       - "<X_REQUEST_ID>"
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
       - "<COOKIE>"
       - "<COOKIE>"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
       X-Content-Type-Options:
       - nosniff
       Server:
@@ -205,16 +205,16 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |
         {
-          "id": "chatcmpl-BXPJ1qMcI6aKi8bikFnU99jDjv3lN",
+          "id": "chatcmpl-C5dQ3HEXtZ4xo52RYA2zOF3IjJhJp",
           "object": "chat.completion",
-          "created": 1747301799,
+          "created": 1755459203,
           "model": "gpt-4.1-nano-2025-04-14",
           "choices": [
             {
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "Ruby is a programming language created by Yukihiro Matsumoto. It is distributed as free software and is protected under a license that allows users to freely use, modify, and distribute the software under certain conditions. The license provides options for redistribution, modification, and inclusion of Ruby code into other software, emphasizing freedom of use while also including disclaimers of warranty.",
+                "content": "The file \"license.txt\" contains the licensing and copyright information for the Ruby programming language. It states that Ruby is free software created by Yukihiro Matsumoto and details the terms under which it can be redistributed or modified. The license allows for copying, modification, and distribution under specific conditions, which include attribution, sharing modifications appropriately, and providing source code when distributing binaries. It also emphasizes that the software is provided \"as is\" without warranties.",
                 "refusal": null,
                 "annotations": []
               },
@@ -223,9 +223,9 @@ http_interactions:
             }
           ],
           "usage": {
-            "prompt_tokens": 533,
-            "completion_tokens": 74,
-            "total_tokens": 607,
+            "prompt_tokens": 540,
+            "completion_tokens": 91,
+            "total_tokens": 631,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "audio_tokens": 0
@@ -238,7 +238,7 @@ http_interactions:
             }
           },
           "service_tier": "default",
-          "system_fingerprint": "fp_8fd43718b3"
+          "system_fingerprint": "fp_479cfdfab2"
         }
-  recorded_at: Thu, 15 May 2025 09:36:40 GMT
+  recorded_at: Sun, 17 Aug 2025 19:33:24 GMT
 recorded_with: VCR 6.3.1

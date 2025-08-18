@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<GPUSTACK_API_BASE>/chat/completions"
+    body:
+      encoding: UTF-8
+      string: '{"model":"qwen3","messages":[{"role":"user","content":"What''s 2 +
+        2?"}],"stream":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.13.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 17 Aug 2025 19:41:11 GMT
+      - Sun, 17 Aug 2025 19:41:11 GMT
+      Server:
+      - uvicorn
+      - uvicorn
+      Keep-Alive:
+      - timeout=15, max=100
+      Content-Length:
+      - '703'
+      Content-Type:
+      - application/json
+      X-Request-Accepted-At:
+      - "<X_REQUEST_ID>"
+      X-Request-Id:
+      - "<X_REQUEST_ID>"
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"\n\n2
+        + 2 equals 4. Let me know if you need help with anything else!","role":"assistant"}}],"created":1755459673,"id":"chatcmpl-YASa0IOIdwL1IPB4bv0bsB4JysvQVAZD","model":"qwen3","object":"chat.completion","usage":{"completion_tokens":160,"completion_tokens_details":{"accepted_prediction_tokens":0,"reasoning_tokens":137,"rejected_prediction_tokens":0},"draft_tokens":0,"draft_tokens_acceptance":0.0,"prompt_tokens":16,"prompt_tokens_details":{"cached_tokens":4},"prompt_tokens_per_second":850.0690681117841,"time_per_output_token_ms":8.397025,"time_to_first_token_ms":18.822,"tokens_per_second":119.08979668394463,"total_tokens":176}}'
+  recorded_at: Sun, 17 Aug 2025 19:41:13 GMT
+recorded_with: VCR 6.3.1

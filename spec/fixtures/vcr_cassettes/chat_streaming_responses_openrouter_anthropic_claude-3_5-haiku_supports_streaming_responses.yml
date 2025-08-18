@@ -6,10 +6,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"model":"anthropic/claude-3.5-haiku","messages":[{"role":"user","content":"Count
-        from 1 to 3"}],"temperature":0.7,"stream":true,"stream_options":{"include_usage":true}}'
+        from 1 to 3"}],"stream":true,"stream_options":{"include_usage":true}}'
     headers:
       User-Agent:
-      - Faraday v2.13.1
+      - Faraday v2.13.4
       Authorization:
       - Bearer <OPENROUTER_API_KEY>
       Content-Type:
@@ -24,49 +24,61 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 12 May 2025 13:40:51 GMT
+      - Sun, 17 Aug 2025 19:42:27 GMT
       Content-Type:
       - text/event-stream
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Cf-Ray:
+      - "<CF_RAY>"
       Access-Control-Allow-Origin:
       - "*"
       Cache-Control:
       - no-cache
-      X-Clerk-Auth-Message:
-      - Invalid JWT form. A JWT consists of three parts separated by dots. (reason=token-invalid,
-        token-carrier=header)
-      X-Clerk-Auth-Reason:
-      - token-invalid
-      X-Clerk-Auth-Status:
-      - signed-out
       Vary:
       - Accept-Encoding
+      Permissions-Policy:
+      - payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com"
+        "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+      Referrer-Policy:
+      - no-referrer, strict-origin-when-cross-origin
+      X-Content-Type-Options:
+      - nosniff
       Server:
       - cloudflare
-      Cf-Ray:
-      - "<CF_RAY>"
     body:
       encoding: UTF-8
       string: |+
         : OPENROUTER PROCESSING
 
-        data: {"id":"gen-1747057251-npT2eVuQ3XtHP3bSmG97","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1747057251,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
 
-        data: {"id":"gen-1747057251-npT2eVuQ3XtHP3bSmG97","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1747057251,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
 
-        data: {"id":"gen-1747057251-npT2eVuQ3XtHP3bSmG97","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1747057251,"choices":[{"index":0,"delta":{"role":"assistant","content":"1, 2"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":"Here"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
 
-        data: {"id":"gen-1747057251-npT2eVuQ3XtHP3bSmG97","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1747057251,"choices":[{"index":0,"delta":{"role":"assistant","content":", 3"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":"'s"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
 
-        data: {"id":"gen-1747057251-npT2eVuQ3XtHP3bSmG97","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1747057251,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":"stop","native_finish_reason":"stop","logprobs":null}]}
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":" counting"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
 
-        data: {"id":"gen-1747057251-npT2eVuQ3XtHP3bSmG97","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1747057251,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}],"usage":{"prompt_tokens":15,"completion_tokens":16,"total_tokens":31,"cost":0.000076,"prompt_tokens_details":{"cached_tokens":0},"completion_tokens_details":{"reasoning_tokens":0}}}
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":" from 1 to"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":" 3:"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":"\n\n1\n2"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":"\n3"},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}]}
+
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":"stop","native_finish_reason":"stop","logprobs":null}]}
+
+        data: {"id":"gen-1755459746-MkCoQtYuEM3A7QCooygZ","provider":"Google","model":"anthropic/claude-3.5-haiku","object":"chat.completion.chunk","created":1755459746,"choices":[{"index":0,"delta":{"role":"assistant","content":""},"finish_reason":null,"native_finish_reason":null,"logprobs":null}],"usage":{"prompt_tokens":15,"completion_tokens":20,"total_tokens":35,"cost":0.000092,"is_byok":false,"prompt_tokens_details":{"cached_tokens":0,"audio_tokens":0},"cost_details":{"upstream_inference_cost":null,"input_audio_cache_read_tokens":null},"completion_tokens_details":{"reasoning_tokens":0}}}
 
         data: [DONE]
 
-  recorded_at: Mon, 12 May 2025 13:40:52 GMT
+  recorded_at: Sun, 17 Aug 2025 19:42:27 GMT
 recorded_with: VCR 6.3.1
 ...

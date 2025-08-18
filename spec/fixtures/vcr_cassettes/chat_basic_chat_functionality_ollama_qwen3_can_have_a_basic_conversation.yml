@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<OLLAMA_API_BASE>/chat/completions"
+    body:
+      encoding: UTF-8
+      string: '{"model":"qwen3","messages":[{"role":"user","content":"What''s 2 +
+        2?"}],"stream":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.13.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 17 Aug 2025 19:40:52 GMT
+      Content-Length:
+      - '1192'
+    body:
+      encoding: UTF-8
+      string: '{"id":"chatcmpl-353","object":"chat.completion","created":1755459652,"model":"qwen3","system_fingerprint":"fp_ollama","choices":[{"index":0,"message":{"role":"assistant","content":"\u003cthink\u003e\nOkay,
+        the user asked, \"What''s 2 + 2?\" That''s a basic math question. Let me make
+        sure I understand it correctly. They''re asking for the sum of 2 and 2. I
+        can just answer 4 directly, but maybe they want a more detailed explanation?
+        Wait, the original question was straightforward. Maybe they''re testing if
+        I know the basics? Or perhaps they want to see if I can handle simple arithmetic.
+        Let me check if there''s any context I''m missing. The user didn''t provide
+        any additional information, so it''s just a simple addition problem. In that
+        case, the answer is definitely 4. But I should confirm that there''s no trick
+        or alternative interpretation. For example, in some contexts, symbols might
+        have different meanings, but in standard arithmetic, 2 + 2 equals 4. So the
+        answer is 4. I should present it clearly and concisely.\n\u003c/think\u003e\n\nThe
+        sum of 2 and 2 is **4**. \n\n**Answer:** 4"},"finish_reason":"stop"}],"usage":{"prompt_tokens":16,"completion_tokens":214,"total_tokens":230}}
+
+        '
+  recorded_at: Sun, 17 Aug 2025 19:40:52 GMT
+recorded_with: VCR 6.3.1

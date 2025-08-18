@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<GPUSTACK_API_BASE>/chat/completions"
+    body:
+      encoding: UTF-8
+      string: '{"model":"qwen3","messages":[{"role":"user","content":"What is the
+        capital of France?"}],"stream":false}'
+    headers:
+      User-Agent:
+      - Faraday v2.13.4
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 17 Aug 2025 19:41:12 GMT
+      - Sun, 17 Aug 2025 19:41:12 GMT
+      Server:
+      - uvicorn
+      - uvicorn
+      Keep-Alive:
+      - timeout=15, max=100
+      Content-Length:
+      - '802'
+      Content-Type:
+      - application/json
+      X-Request-Accepted-At:
+      - "<X_REQUEST_ID>"
+      X-Request-Id:
+      - "<X_REQUEST_ID>"
+      Access-Control-Allow-Origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjaG9pY2VzIjpbeyJmaW5pc2hfcmVhc29uIjoic3RvcCIsImluZGV4IjowLCJtZXNzYWdlIjp7ImNvbnRlbnQiOiJcblxuVGhlIGNhcGl0YWwgb2YgRnJhbmNlIGlzICoqUGFyaXMqKi4gSXQgaXMgYSBtYWpvciBnbG9iYWwgY2l0eSBrbm93biBmb3IgaXRzIGN1bHR1cmFsIGxhbmRtYXJrcywgaGlzdG9yaWNhbCBzaWduaWZpY2FuY2UsIGFuZCBlY29ub21pYyBpbmZsdWVuY2UuIPCfh6vwn4e34pyoIiwicm9sZSI6ImFzc2lzdGFudCJ9fV0sImNyZWF0ZWQiOjE3NTU0NTk2NzUsImlkIjoiY2hhdGNtcGwtSkRMd1Y0Y2JCVFliVGtoYWlWenJVRnpKVDJmcHk1VWUiLCJtb2RlbCI6InF3ZW4zIiwib2JqZWN0IjoiY2hhdC5jb21wbGV0aW9uIiwidXNhZ2UiOnsiY29tcGxldGlvbl90b2tlbnMiOjI1MSwiY29tcGxldGlvbl90b2tlbnNfZGV0YWlscyI6eyJhY2NlcHRlZF9wcmVkaWN0aW9uX3Rva2VucyI6MCwicmVhc29uaW5nX3Rva2VucyI6MjE0LCJyZWplY3RlZF9wcmVkaWN0aW9uX3Rva2VucyI6MH0sImRyYWZ0X3Rva2VucyI6MCwiZHJhZnRfdG9rZW5zX2FjY2VwdGFuY2UiOjAuMCwicHJvbXB0X3Rva2VucyI6MTUsInByb21wdF90b2tlbnNfZGV0YWlscyI6eyJjYWNoZWRfdG9rZW5zIjozfSwicHJvbXB0X3Rva2Vuc19wZXJfc2Vjb25kIjo4ODcuNTczOTY0NDk3MDQxNSwidGltZV9wZXJfb3V0cHV0X3Rva2VuX21zIjo5LjA3Njk1NjE3NTI5ODgwNCwidGltZV90b19maXJzdF90b2tlbl9tcyI6MTYuOSwidG9rZW5zX3Blcl9zZWNvbmQiOjExMC4xNjkwODk4MDE0MTQ3NCwidG90YWxfdG9rZW5zIjoyNjZ9fQ==
+  recorded_at: Sun, 17 Aug 2025 19:41:15 GMT
+recorded_with: VCR 6.3.1
